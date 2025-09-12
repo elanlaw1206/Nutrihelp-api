@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const supabase = require('../new_utils/supabaseAdmin'); // default export above
+const getConsentFor = require('../adapters/getConsentFor/real');
 
 // POST /api/consents  -> save a consent
 router.post('/consents', async (req, res) => {
@@ -61,5 +62,20 @@ router.patch('/consents/:uuid/revoke', async (req, res) => {
   if (!data || data.length === 0) return res.status(404).json({ error: 'Consent not found' });
   return res.status(200).json({ message: 'Consent revoked', row: data[0] });
 });
+
+router.get('/consents/:user_id/status', async (req, res) => {
+  try {
+    const { user_id } = req.params;
+    const { consent_type } = req.query;
+    if (!consent_type) return res.status(400).json({ error: 'consent_type is required' });
+
+    const result = await getConsentFor(user_id, consent_type);
+    return res.status(200).json(result);
+  } catch (e) {
+    console.error('get consent status error:', e && e.message ? e.message : e);
+    return res.status(500).json({ error: e && e.message ? e.message : 'Internal server error' });
+  }
+});
+
 
 module.exports = router;
