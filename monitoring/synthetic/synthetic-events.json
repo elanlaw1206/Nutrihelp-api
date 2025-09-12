@@ -1,0 +1,182 @@
+[
+  {
+    "@timestamp": "2025-09-12T02:00:00.000Z",
+    "event.action": "auth.login",
+    "event.outcome": "failure",
+    "user.id": "u1",
+    "source.ip": "10.0.0.8",
+    "url.path": "/login"
+  },
+  {
+    "@timestamp": "2025-09-12T02:00:10.000Z",
+    "event.action": "auth.login",
+    "event.outcome": "failure",
+    "user.id": "u1",
+    "source.ip": "10.0.0.8",
+    "url.path": "/login"
+  },
+  {
+    "@timestamp": "2025-09-12T02:00:20.000Z",
+    "event.action": "auth.login",
+    "event.outcome": "failure",
+    "user.id": "u1",
+    "source.ip": "10.0.0.8",
+    "url.path": "/login"
+  },
+  {
+    "@timestamp": "2025-09-12T02:00:30.000Z",
+    "event.action": "auth.login",
+    "event.outcome": "failure",
+    "user.id": "u1",
+    "source.ip": "10.0.0.8",
+    "url.path": "/login"
+  },
+  {
+    "@timestamp": "2025-09-12T02:00:40.000Z",
+    "event.action": "auth.login",
+    "event.outcome": "failure",
+    "user.id": "u1",
+    "source.ip": "10.0.0.8",
+    "url.path": "/login"
+  },
+  {
+    "@timestamp": "2025-09-12T02:00:50.000Z",
+    "event.action": "auth.login",
+    "event.outcome": "failure",
+    "user.id": "u1",
+    "source.ip": "10.0.0.8",
+    "url.path": "/login"
+  },
+  {
+    "@timestamp": "2025-09-12T02:01:00.000Z",
+    "event.action": "auth.login",
+    "event.outcome": "failure",
+    "user.id": "u1",
+    "source.ip": "10.0.0.8",
+    "url.path": "/login"
+  },
+  {
+    "@timestamp": "2025-09-12T02:01:10.000Z",
+    "event.action": "auth.login",
+    "event.outcome": "failure",
+    "user.id": "u1",
+    "source.ip": "10.0.0.8",
+    "url.path": "/login"
+  },
+  {
+    "@timestamp": "2025-09-12T02:01:20.000Z",
+    "event.action": "auth.login",
+    "event.outcome": "failure",
+    "user.id": "u1",
+    "source.ip": "10.0.0.8",
+    "url.path": "/login"
+  },
+  {
+    "@timestamp": "2025-09-12T02:01:30.000Z",
+    "event.action": "auth.login",
+    "event.outcome": "failure",
+    "user.id": "u1",
+    "source.ip": "10.0.0.8",
+    "url.path": "/login"
+  },
+  {
+    "@timestamp": "2025-09-12T02:01:40.000Z",
+    "event.action": "auth.login",
+    "event.outcome": "failure",
+    "user.id": "u1",
+    "source.ip": "10.0.0.8",
+    "url.path": "/login"
+  },
+  {
+    "@timestamp": "2025-09-12T02:01:50.000Z",
+    "event.action": "auth.login",
+    "event.outcome": "failure",
+    "user.id": "u1",
+    "source.ip": "10.0.0.8",
+    "url.path": "/login"
+  },
+  {
+    "@timestamp": "2025-09-12T03:00:00.000Z",
+    "event.action": "auth.login",
+    "event.outcome": "success",
+    "user.id": "u1",
+    "source.ip": "10.0.0.99",
+    "device.id": "d-777",
+    "url.path": "/login"
+  },
+  {
+    "@timestamp": "2025-09-12T03:01:00.000Z",
+    "event.action": "auth.login",
+    "event.outcome": "success",
+    "user.id": "u2",
+    "source.ip": "10.0.0.99",
+    "device.id": "d-777",
+    "url.path": "/login"
+  },
+  {
+    "@timestamp": "2025-09-12T03:02:00.000Z",
+    "event.action": "auth.login",
+    "event.outcome": "success",
+    "user.id": "u3",
+    "source.ip": "10.0.0.99",
+    "device.id": "d-777",
+    "url.path": "/login"
+  },
+  {
+    "@timestamp": "2025-09-12T03:03:00.000Z",
+    "event.action": "auth.login",
+    "event.outcome": "success",
+    "user.id": "u4",
+    "source.ip": "10.0.0.99",
+    "device.id": "d-777",
+    "url.path": "/login"
+  },
+  {
+    "@timestamp": "2025-09-12T03:04:00.000Z",
+    "event.action": "auth.login",
+    "event.outcome": "success",
+    "user.id": "u5",
+    "source.ip": "10.0.0.99",
+    "device.id": "d-777",
+    "url.path": "/login"
+  },
+  {
+    "@timestamp": "2025-09-12T03:05:00.000Z",
+    "event.action": "auth.login",
+    "event.outcome": "success",
+    "user.id": "u6",
+    "source.ip": "10.0.0.99",
+    "device.id": "d-777",
+    "url.path": "/login"
+  },
+  {
+    "@timestamp": "2025-09-12T20:00:00.000Z",
+    "event.action": "consent.read",
+    "event.outcome": "success",
+    "user.id": "staff1",
+    "source.ip": "10.0.1.5",
+    "consent.scope": "medical",
+    "is_off_hours": true,
+    "url.path": "/consents/123"
+  },
+  {
+    "@timestamp": "2025-09-12T08:00:00.000Z",
+    "event.action": "consent.read",
+    "event.outcome": "success",
+    "user.id": "staff1",
+    "source.ip": "10.0.1.5",
+    "consent.scope": "medical",
+    "is_off_hours": false,
+    "url.path": "/consents/456"
+  },
+  {
+    "@timestamp": "2025-09-12T20:05:00.000Z",
+    "event.action": "consent.update",
+    "event.outcome": "success",
+    "user.id": "staff2",
+    "source.ip": "10.0.1.6",
+    "consent.scope": "medical",
+    "is_off_hours": false,
+    "url.path": "/consents/789"
+  }
+]

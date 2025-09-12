@@ -1,0 +1,23 @@
+title: Off-hours sensitive consent access or any sensitive update
+id: sns-0003
+status: experimental
+description: Flags sensitive consent reads during off-hours and all sensitive consent updates
+logsource:
+  category: application
+  product: nutrihelp
+detection:
+  sel_sensitive_read:
+    event.action: consent.read
+    consent.scope|contains: medical
+    is_off_hours: true
+  sel_sensitive_update:
+    event.action: consent.update
+    consent.scope|contains: medical
+  condition: sel_sensitive_read or sel_sensitive_update
+fields:
+  - user.id
+  - consent.scope
+  - is_off_hours
+  - source.ip
+  - url.path
+level: high

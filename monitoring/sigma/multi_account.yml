@@ -1,0 +1,18 @@
+title: Multi-account access from same IP/device in short window
+id: acct-0002
+status: experimental
+description: Detects a single IP/device successfully logging into many distinct accounts within 10 minutes
+logsource:
+  category: application
+  product: nutrihelp
+detection:
+  sel_ok:
+    event.action: auth.login
+    event.outcome: success
+  timeframe: 10m
+  condition: sel_ok | distinct_count(user.id) by source.ip >= 5 or sel_ok | distinct_count(user.id) by device.id >= 5
+fields:
+  - source.ip
+  - device.id
+  - user.id
+level: medium
