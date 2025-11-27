@@ -3,10 +3,12 @@ const { createClient } = require('@supabase/supabase-js');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const crypto = require('crypto');
+const sessionLifecycle = require('./sessionLifecycle');
+
 
 const supabase = createClient(
-  process.env.SUPABASE_URL,
-  process.env.SUPABASE_ANON_KEY
+    process.env.SUPABASE_URL,
+    process.env.SUPABASE_ANON_KEY
 );
 
 class AuthService {
@@ -45,7 +47,7 @@ class AuthService {
                     password: hashedPassword,
                     first_name,
                     last_name,
-                    role_id: 7, 
+                    role_id: 7,
                     account_status: 'active',
                     email_verified: false,
                     mfa_enabled: false,
@@ -112,6 +114,38 @@ class AuthService {
             // Record successful login
             await this.logAuthAttempt(user.user_id, email, true, deviceInfo);
 
+            // === NEW: create user_profiles → user_sessions's secure session log ===
+            let sessionId = null;
+            let sessionExpiresAt = null;
+
+            try {
+                // 1. Find the public.user_profiles.id by email
+                const { data: profile, error: profileError } = await supabase
+                    .from('user_profiles')
+                    .select('id')
+                    .eq('email', email)
+                    .single();
+
+                if (profileError || !profile) {
+                    console.warn('[AuthService.login] user_profiles not found for email:', email, profileError);
+                } else {
+                    const sessionInfo = await sessionLifecycle.createSession({
+                        userProfileId: user.user_id,
+                        deviceId: null,
+                        accessToken: tokens.accessToken,
+                        refreshToken: tokens.refreshToken,
+                        ipAddress: deviceInfo.ip || null,
+                        userAgent: deviceInfo.userAgent || null,
+                    });
+
+                    sessionId = sessionInfo.sessionId;
+                    sessionExpiresAt = sessionInfo.sessionExpiresAt;
+                }
+            } catch (e) {
+                console.error('[AuthService.login] Failed to create user session:', e);
+                // not to block the login, just log error
+            }
+
             return {
                 success: true,
                 user: {
@@ -120,7 +154,9 @@ class AuthService {
                     name: user.name,
                     role: user.user_roles?.role_name || 'user'
                 },
-                ...tokens
+                sessionId,
+                sessionExpiresAt,        // from sessionLifecycle.createSession(...)
+                ...tokens               // accessToken, refreshToken, etc.
             };
 
         } catch (error) {
@@ -149,7 +185,7 @@ class AuthService {
             const accessToken = jwt.sign(
                 accessPayload,
                 process.env.JWT_TOKEN,
-                { 
+                {
                     expiresIn: this.accessTokenExpiry,
                     algorithm: 'HS256'
                 }

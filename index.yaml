@@ -2204,6 +2204,14 @@ paths:
                   tokenType:
                     type: string
                     example: "Bearer"
+                  sessionId:
+                    type: string
+                    format: uuid
+                    description: ID of the server-side session created in user_sessions
+                  sessionExpiresAt:
+                    type: string
+                    format: date-time
+                    description: Optional – when this session is scheduled to expire  
         '401':
           description: Login failed
   /auth/refresh:
